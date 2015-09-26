@@ -1,6 +1,21 @@
 Training Data:
 	Conservative and Democratic
 	What do we train on ? News vs. Opinion
+		News. Opinions should be trivial
 	Bias Rating Site to attach rating to sites
-	Top 100 conservative sites
-		http://rightwingnews.com/john-hawkins/the-100-most-popular-conservative-websites-of-2015/
+		http://www.allsides.com/about-bias
+		http://www.businessinsider.com/what-your-preferred-news-outlet-says-about-your-political-ideology-2014-10
+			on the basis of viewership allignment
+	Sites
+		Top 100 conservative sites
+			http://rightwingnews.com/john-hawkins/the-100-most-popular-conservative-websites-of-2015/
+
+Data Minipulation:
+	Throw words into bins, manipulate each sentence into certain features
+	Wordnet:
+		https://wordnet.princeton.edu/
+	Features:
+		Single WOrds
+		POS
+		Bigram words
+
