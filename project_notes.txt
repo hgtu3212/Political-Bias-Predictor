@@ -1,0 +1,6 @@
+Training Data:
+	Conservative and Democratic
+	What do we train on ? News vs. Opinion
+	Bias Rating Site to attach rating to sites
+	Top 100 conservative sites
+		http://rightwingnews.com/john-hawkins/the-100-most-popular-conservative-websites-of-2015/
