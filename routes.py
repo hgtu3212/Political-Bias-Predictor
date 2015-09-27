@@ -47,7 +47,7 @@ def parse_input(input_string):
 	else:
 		return input_string
 
-@app.route('/post_data')
+@app.route('/post_data', method = ["POST"])
 def handle_post_data():
 
 	#Receive data from site 
