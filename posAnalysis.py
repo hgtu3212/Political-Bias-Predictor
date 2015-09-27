@@ -30,7 +30,7 @@ def find_similars(words, sentence):
 			print text 
 		text.similar(words[i])
 
-		similars = None
+		print 
 		if similars is not None:
 			for item in similars:
 				newbin.add(item)
