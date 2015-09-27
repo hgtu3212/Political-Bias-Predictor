@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, abort, jsonify
-from flask.ext.sqlalchemy import SQLAlchemyapp = Flask(__name__)
+from flask.ext.sqlalchemy import SQLAlchemyapp
 import pickle
 import gzip
 from sklearn import linear_model
@@ -9,6 +9,8 @@ import readability
 import urllib
 import lxml
 from bs4 import BeautifulSoup
+
+app  = Flask(__name__)
 
 def getObjFromPklz(infilename):
 	"""
