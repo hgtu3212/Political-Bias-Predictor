@@ -33,9 +33,10 @@ def writeToPklz(outfilename, obj):
 	finally:
 		output.close()
 
-@app.route('http://biashtx.azurewebsites.net/')
+# @app.route('http://biashtx.azurewebsites.net/')
+@app.route('/')
 def home():
-	return
+	return render_template('index.html')
 
 def parse_input(input_string):
 	"""
@@ -63,9 +64,12 @@ def handle_data():
 	# return dictionary
 	return jsonify(rating=vect)
 
-@app.route('/', methods=['POST'])
-def my_form_post():
+# @app.route('/', methods=['POST'])
+# def my_form_post():
 
-    text = request.form['text']
-    processed_text = text.upper()
-    return processed_text
+#     text = request.form['text']
+#     processed_text = text.upper()
+#     return processed_text
+
+if __name__ == '__main__':
+	app.run(debug=True)
