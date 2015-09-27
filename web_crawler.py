@@ -16,7 +16,7 @@ def get_links():
             final_links.append((name, article.url))
 
 
-
+print get_links()
 
 
 
