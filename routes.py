@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, abort, jsonify
 from flask.ext.sqlalchemy import SQLAlchemyapp = Flask(__name__)
 import pickle
 import gzip
+from sklearn import linear_model
+import numpy as np
 
 def getObjFromPklz(infilename):
 	"""
@@ -27,6 +29,12 @@ def writeToPklz(outfilename, obj):
 @app.route('http://biashktx.azurewebsites.net/')
 def home():
 	return
+
+def parse_input(input_string):
+	"""
+	parse input as string or as url
+	"""
+	
 
 @app.route('/get_data')
 def handle_data():
