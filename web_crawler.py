@@ -11,16 +11,13 @@ from bs4 import BeautifulSoup
 #               ("breitbart", "http://www.breitbart.com/big-government/"), ("huffington post", "http://www.huffingtonpost.com/politics/"),
 #               ("cnbc", "http://www.cnbc.com/politics/"), ("the blaze", "http://www.theblaze.com/stories/")]
 
-<<<<<<< HEAD
-print get_links()
-=======
+
 def get_links(link):
 
     links = []
     newspapr = newspaper.build(link)
     for article in newspapr.articles:
         links.append(article.url)
->>>>>>> 465752ef876570b881b8afe4d65bf7e4f5814967
 
     return links
 
