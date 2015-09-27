@@ -33,7 +33,7 @@ def writeToPklz(outfilename, obj):
 	finally:
 		output.close()
 
-@app.route('http://biashktx.azurewebsites.net/')
+@app.route('http://biashtx.azurewebsites.net/')
 def home():
 	return
 
@@ -62,3 +62,10 @@ def handle_data():
 
 	# return dictionary
 	return jsonify(rating=vect)
+
+@app.route('/', methods=['POST'])
+def my_form_post():
+
+    text = request.form['text']
+    processed_text = text.upper()
+    return processed_text
