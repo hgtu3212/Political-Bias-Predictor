@@ -3,6 +3,7 @@ from sklearn import linear_model
 import numpy as np
 import pickle
 import gzip
+import csv
 
 right1 = "Dear Conservative,This week, the GOP did the unthinkable: they caved and allowed Loretta Lynch to become the next attorney general.We have covered how lynch is rabidly anti-gun and supports Obama’s executive action on amnesty, but little has been discussed in the media about how pro-abortion this woman is.In 2006, Loretta Lynch signed an amicus brief sent to the Supreme Court arguing that the Federal partial-birth abortion ban was unconstitutional because the term 'living fetus' was 'hopelessly vague.' It doesn’t get more disgusting than this…Thanks to the spineless GOP, this woman is the chief law enforcement agent in the country. Some in the left have even moved beyond partial-birth abortions and begun advocating what they call after-birth abortion. No, this is not a joke. There are liberals who are advocating aborting children after they’ve already been born! Congress has completely buckled on protecting the rights of the unborn. Demand that they pass the Pain Capable Unborn Child Protection Act of 2015 and outlaw abortion after 20 weeks! At 20 weeks, unborn children feel pain. If surgeons need to operate on a child in utero, the child is given fetal anesthesia to alleviate the pain. Some doctors have witnessed in utero pain reactions as early as 18-weeks into a pregnancy. The fact of the matter is that doctors are ethically required to administer anesthesia to reduce the child’s pain and suffering. So how can it possibly be legal to kill a 20-week old baby? There is an abortion procedure known as dismemberment. It is exactly what it sounds like. As late as the second trimester, doctors kill the baby by literally dismembering it. I believe life begins at conception and it is horrifying to think that a child could undergo such a gruesome procedure and feel all of the accompanying pain. That is what the Pain Capable Unborn Child Protection Act of 2015 (HR 36) attempts to stop. When the unborn child reaches 20-weeks and is able to feel and register pain signals, he or she cannot be aborted. Period. Heck, we have laws against cruel and unusual punishment for criminals. There is a whole industry designed to implementing the death penalty with minimal pain. Yet while we spend millions and millions of dollars to painlessly kill murderers, nothing is being done to protect the unborn. Congress had a chance to pass this law earlier in the year, and they got cold feet. They left hundreds of thousands of March for Life demonstrators out in the cold. When the Supreme Court released its decision in Roe v Wade, it stated that it was unconscionable to abort a baby who had reached the developmental point of viability. The court defined viability as the moment a fetus could potentially survive outside of the womb, even with the help of medical aids. The Court left it up to Congress to delineate this point in gestation and the science supports outlawing abortion after 20-weeks. In 2011, a child was born in Europe at 21 weeks and survived, proving that the point of viability is much earlier than the Supreme Court believed in 1973. Another child was born at 21 weeks, 5 days gestation in 2006. Today, she is in Second Grade. Pro-abortion advocates believe that they have the right to abortion on-demand at any point in pregnancy. The reality is that numerous court cases support the right of states and the Federal government to outlaw abortions after the point of viability. When this bill was brought before Congress in January, the GOP spit in our faces and chickened out. We cannot allow that to happen again! Pressure is rising for Congress to pass this common-sense law. It is up to you to raise your voice and protect the rights of the unborn! Tell Congress that if the unborn can feel pain, they CANNOT be aborted! Sincerely, Joe Otto"
 right2 = "The country is closely divided over abortion and fetal tissue research, yet tends to view Planned Parenthood favorably. The latest Fox News poll asks about these issues, as well as the secretly-shot videos that show Planned Parenthood employees talking about dollar amounts associated with fetal tissue and organs from abortions. Nearly half of voters have seen or heard about the videos (49 percent).  More self-identified pro-life voters (54 percent) report having seen the videos than pro-choice voters (46 percent). Among those familiar with the videos, 49 percent describe them as disturbing and would prefer to stop the use of fetal tissue from abortions in medical research.  Forty-three percent agree the videos are disturbing, but say the research should continue.Additional undercover videos were released since the poll was conducted.CLICK HERE TO READ THE POLL RESULTSThe numbers are about the same when all voters are asked generally about using organs and tissue from aborted human fetuses for medical research on deadly diseases:  48 percent approve vs. 47 percent disapprove.Majorities of Democrats (64 percent) and independents (56 percent) approve of fetal tissue research in general, while more than two-thirds of Republicans disapprove (69 percent).By a 52-42 percent margin, voters think Planned Parenthood should receive federal funding.   Groups most likely to support government funding include Democrats (79 percent), liberals (79 percent), blacks (79 percent), pro-choice voters (74 percent), young voters (64 percent), urbanites (61 percent) and women (55 percent).Those most likely to oppose federal funding include Republicans (72 percent), white evangelical Christians (69 percent), those in the Tea Party movement (69 percent), pro-life voters (64 percent), conservatives (61 percent) and regular church-goers (53 percent).In addition, more voters than not view Planned Parenthood positively: 50 percent have a favorable opinion, while 38 percent view it unfavorably.  Six percent say they have never heard of Planned Parenthood.Women (54 percent) are more likely than men (46 percent) and blacks (66 percent) are more likely than whites (46 percent) to have a positive view. There’s also a big difference among age groups, as 61 percent of voters under age 30 have a favorable opinion of Planned Parenthood compared to just 44 percent of those ages 55 and over.Democrats (74 percent) are more than three times as likely as Republicans (22 percent) to feel positively toward Planned Parenthood.  For independents, 52 percent have a favorable opinion.Meanwhile, 47 percent of voters consider themselves pro-choice, while 46 percent are pro-life.  Earlier this year more voters identified as pro-choice by a five-point margin (49 vs. 44 percent in April 2015).  Opinion has been narrowly divided on the abortion issue for years and which view is on top shifts back and forth. The Fox News poll is based on landline and cell phone interviews with 1,008 randomly chosen registered voters nationwide and was conducted under the joint direction of Anderson Robbins Research (D) and Shaw & Company Research (R) from August 11-13, 2015. The poll has a margin of sampling error of plus or minus three percentage points for all registered voters."
@@ -15,6 +16,15 @@ left3 = "The conclusion of a sweeping new nationwide study released today that i
 right = ['I am pro-life.', 'Everyone has the right to life.']
 left = ['I am pro-choice.', 'Everyone has the right to an abortion']
 new = ['Everyone has an abortion.', 'Everyone needs to make their own choice.', 'x', 'right']
+
+def convert_file_to_string(filename):
+	string = ''
+	with open(filename) as csvfile:
+		reader = csv.reader(csvfile)
+		for row in reader:
+			for sentence in row:
+				string += sentence
+	return string
 
 
 def string_to_word_list(string):
@@ -156,12 +166,14 @@ def getObjFromPklz(infilename):
 	    f.close()
 
 
+right_articles = [convert_file_to_string('conservative.txt')]
+left_articles = [convert_file_to_string('huffpotext1.txt')]
+all_words = get_all_words(left_articles + right_articles)
 
-model = train_model([left1, left2], [right1, right3])[0]
+# model = train_model(left_articles, right_articles)[0]
 # writeToPklz('first_clf', model)
-# model = getObjFromPklz('first_clf')
-print predict(model, [left1, left2], [right1, right3], [left3, right2])
-
+model = getObjFromPklz('first_clf')
+print predict(model, left_articles, right_articles, [left1, right2, right3, 'life'])
 
 
 
