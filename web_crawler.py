@@ -1,28 +1,29 @@
 import newspaper
+import csv
 
-def get_links():
-    newspapers = [("cnn", "http://www.cnn.com/politics"), ("nytimes", "http://www.nytimes.com/politics"),
-              ("new yorker", "http://www.newyorker.com/news"), ("fox news", "http://www.foxnews.com/politics/index.html"),
-              ("breitbart", "http://www.breitbart.com/big-government/"), ("huffington post", "http://www.huffingtonpost.com/politics/"),
-              ("cnbc", "http://www.cnbc.com/politics/"), ("the blaze", "http://www.theblaze.com/stories/")]
-
-    final_links = []
-    for tupl in range(len(newspapers)):
-        name = tupl[0]
-        news_link = tupl[1]
-
-        newspapr = newspaper.build(news_link)
-        for article in newspapr.article:
-            final_links.append((name, article.url))
+def read_list_of_links(filename):
+  """
+  Reads in a txt file containing links into a list
+  """
+  lines = []
+  with open(filename) as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+      lines.append(row[0])
+  return lines
 
 
+def get_article_text(link):
 
+    text = []
+    newspapr = newspaper.build(link)
+    for article in newspapr.articles:
+      # print(article.url)
+      text.append(article.text)
 
+    return text
 
-
-
-
-
-
-
+# print read_list_of_links("huffington_post_links.txt")
+print read_list_of_links("fox_news_links.txt")
+print get_article_text("http://foxnews.com/politics/index.html")
 

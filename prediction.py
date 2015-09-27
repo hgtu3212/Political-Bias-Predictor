@@ -122,31 +122,17 @@ def predict(left, right, new):
 
 	# Predict on new data
 	all_words = get_all_words(left + right)
-	print all_words
 	prediction_matrix = create_prediction_matrix(all_words, new)
-	print prediction_matrix.shape
+	prediction_list = []
 	for i in range(len(prediction_matrix)):
 		row_to_predict = prediction_matrix[i]
-		prediction = round(clf.predict(row_to_predict), 3)
-		print prediction
+		prediction = round(clf.predict(row_to_predict), 2)
+		prediction_list.append(prediction)
 
-	return
+	return np.array(prediction_list)
 
 
-# print create_prediction_matrix(get_all_words(left + right), new)
 print predict([left1, left2], [right1, right3], [left3, right2])
-
-# freq_map_right = get_freq_map(right)
-# freq_map_left = get_freq_map(left)
-# print "FREQ MAP RIGHT:", freq_map_right
-# print "FREQ MAP LEFT:", freq_map_left
-# all_words = get_all_words([right, left])
-# print all_words
-# print create_vector(all_words, freq_map_right)
-# print freq_map_right
-# print freq_map_left
-
-
 
 
 
