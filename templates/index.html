@@ -3,7 +3,6 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="post.js"></script>
 </head>
 
 <body>
@@ -13,11 +12,11 @@
             <h2 class="b text-center">Bias Predictor</h2>
             <h3 class="text-center"> Predict if a article is liberal or conservative</h3>
             <br>
-            <form class="form-horizontal" action="." method="POST">
+            <form class="form-horizontal" action="/post_data" method="POST">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Dump Article:</label>
                     <div class="col-sm-8">
-                       <textarea class="form-control textbox" rows="6" name="domain"></textarea>
+                       <textarea class="form-control" rows="6" name="domain"></textarea>
                     </div>
                     <br><br><br><br><br>
                     <input type="submit" value="Submit" class="btn btn-primary">

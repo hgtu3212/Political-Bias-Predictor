@@ -3,7 +3,6 @@ import urllib
 import lxml
 from bs4 import BeautifulSoup
 
-<<<<<<< HEAD
 links = ["http://www.huffingtonpost.com/entry/john-boehner-departure-congress_5605b381e4b0768126fd952e",
          "http://www.newyorker.com/news/news-desk/what-can-china-achieve-with-cap-and-trade"]
 def parseArticles(listoflinks):
