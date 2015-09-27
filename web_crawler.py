@@ -1,28 +1,45 @@
 import newspaper
+import readability
+import urllib
+import lxml
+from bs4 import BeautifulSoup
 
-def get_links():
-    newspapers = [("cnn", "http://www.cnn.com/politics"), ("nytimes", "http://www.nytimes.com/politics"),
-              ("new yorker", "http://www.newyorker.com/news"), ("fox news", "http://www.foxnews.com/politics/index.html"),
-              ("breitbart", "http://www.breitbart.com/big-government/"), ("huffington post", "http://www.huffingtonpost.com/politics/"),
-              ("cnbc", "http://www.cnbc.com/politics/"), ("the blaze", "http://www.theblaze.com/stories/")]
+### Uses newspaper, readability, urllib, lxml, and BeautifulSoup python libraries to parse newspaper text ###
 
-    final_links = []
-    for tupl in range(len(newspapers)):
-        name = tupl[0]
-        news_link = tupl[1]
+# [("cnn", "http://www.cnn.com/politics"), ("nytimes", "http://www.nytimes.com/politics"),
+#               ("new yorker", "http://www.newyorker.com/news"), ("fox news", "http://www.foxnews.com/politics/index.html"),
+#               ("breitbart", "http://www.breitbart.com/big-government/"), ("huffington post", "http://www.huffingtonpost.com/politics/"),
+#               ("cnbc", "http://www.cnbc.com/politics/"), ("the blaze", "http://www.theblaze.com/stories/")]
 
-        newspapr = newspaper.build(news_link)
-        for article in newspapr.article:
-            final_links.append((name, article.url))
+def get_links(link):
+
+    links = []
+    newspapr = newspaper.build(link)
+    for article in newspapr.articles:
+        links.append(article.url)
+
+    return links
+
+def get_article_text(links):
+    '''
+    
+    '''
+    list_articles = []
+    for link in links:
+        # clean up html, getting rid of unwanted text
+        html1 = urllib.urlopen(link).read()
+        readable_title = readability.Document(html1).short_title()
+        readable_article = readability.Document(html1).summary()
+
+        # parse html
+        article_soupify = BeautifulSoup(readable_article, "lxml")
+        list_articles.append(readable_title + " " + article_soupify.get_text())
+
+    return list_articles
 
 
-
-
-
-
-
-
-
+links1 = get_links("http://www.nytimes.com/politics")
+print get_article_text(links1)
 
 
 
