@@ -24,6 +24,7 @@ def get_article_text(link):
     return text
 
 # print read_list_of_links("huffington_post_links.txt")
-print read_list_of_links("fox_news_links.txt")
+# print read_list_of_links("fox_news_links.txt")
+print read_list_of_links("blaze_news_links.txt")
 print get_article_text("http://foxnews.com/politics/index.html")
 

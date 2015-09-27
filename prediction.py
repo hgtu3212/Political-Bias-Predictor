@@ -117,7 +117,7 @@ def train_model(left,right):
 	feature_matrix, result_matrix = create_training_matrices(left, right)
 	clf = linear_model.LinearRegression()
 	clf.fit(feature_matrix, result_matrix)
-	return clf
+	return (clf, left, right)
 
 
 def predict(model, left, right, new):
@@ -157,7 +157,7 @@ def getObjFromPklz(infilename):
 
 
 
-model = train_model([left1, left2], [right1, right3])
+model = train_model([left1, left2], [right1, right3])[0]
 # writeToPklz('first_clf', model)
 # model = getObjFromPklz('first_clf')
 print predict(model, [left1, left2], [right1, right3], [left3, right2])
