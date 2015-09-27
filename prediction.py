@@ -170,10 +170,10 @@ right_articles = [convert_file_to_string('conservative.txt')]
 left_articles = [convert_file_to_string('huffpotext1.txt')]
 all_words = get_all_words(left_articles + right_articles)
 
-# model = train_model(left_articles, right_articles)[0]
+# model = train_model(left_articles, right_articles)
 # writeToPklz('first_clf', model)
 model = getObjFromPklz('first_clf')
-print predict(model, left_articles, right_articles, ['religion', 'Gay rights', 'to', 'conservative'])
+print predict(model[0], model[1], model[2], ['religion', 'Gay rights', 'to', 'conservative'])
 
 
 
