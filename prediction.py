@@ -140,7 +140,7 @@ def predict(model, left, right, new):
 	prediction_list = []
 	for i in range(len(prediction_matrix)):
 		row_to_predict = prediction_matrix[i]
-		prediction = round(model.predict(row_to_predict), 2)
+		prediction = round(model.predict(row_to_predict) + 3.23, 2)
 		prediction_list.append(prediction)
 
 	return np.array(prediction_list)
@@ -173,7 +173,7 @@ all_words = get_all_words(left_articles + right_articles)
 # model = train_model(left_articles, right_articles)[0]
 # writeToPklz('first_clf', model)
 model = getObjFromPklz('first_clf')
-print predict(model, left_articles, right_articles, [left1, right2, right3, 'life'])
+print predict(model, left_articles, right_articles, ['religion', 'Gay rights', 'freedom', 'conservative'])
 
 
 
