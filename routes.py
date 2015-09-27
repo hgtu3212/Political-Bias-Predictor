@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, abort, jsonify
-from flask.ext.sqlalchemy import SQLAlchemyapp
+# from flask.ext.sqlalchemy import SQLAlchemyapp
 import pickle
 import gzip
 from sklearn import linear_model
