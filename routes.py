@@ -47,29 +47,29 @@ def parse_input(input_string):
 	else:
 		return input_string
 
-@app.route('/get_data')
-def handle_data():
+@app.route('/post_data')
+def handle_post_data():
 
 	#Receive data from site 
 
 	data = {
 	'input' : request.form['input']
 	}# format the records you received into list of dictionaries
+	handle_get_vector(data['input'])
 
+@app.route('/get_vector')
+def handle_get_vector(stringInput):
+
+	#parse the input into text if url
+	textInput = parse_input(stringInput)
+	#Get vector with our given input data 
 	model = getObjFromPklz("clf_model")
-	stringInput = parse_input(data['input'])
 	#run our input through our model
-	vect = {'rating': predict(model[0],model[1],model[2], stringInput)}
+	vect = {'rating': predict(model[0],model[1],model[2], textInput)}
 
 	# return dictionary
 	return jsonify(rating=vect)
 
-# @app.route('/', methods=['POST'])
-# def my_form_post():
-
-#     text = request.form['text']
-#     processed_text = text.upper()
-#     return processed_text
 
 if __name__ == '__main__':
 	app.run(debug=True)
