@@ -1,4 +1,17 @@
 import newspaper
+import csv
+
+def read_list_of_links(filename):
+  """
+  Reads in a txt file containing links into a list
+  """
+  lines = []
+  with open(filename) as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+      lines.append(row[0])
+  return lines
+
 
 def get_article_text(link):
 
@@ -10,6 +23,7 @@ def get_article_text(link):
 
     return text
 
+print read_list_of_links("huffington_post_links.txt")
 print get_article_text("http://foxnews.com/politics/index.html")
 
 # List of Fox News Links received
