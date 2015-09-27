@@ -111,6 +111,7 @@ def create_prediction_matrix(all_words, new):
 		feature_row = create_article_vector(all_words, get_freq_map(article))
 		feature_list.append([1] + feature_row)
 	return np.array(feature_list)
+
 def train_model(left,right):
 	# Train Model
 	feature_matrix, result_matrix = create_training_matrices(left, right)
@@ -119,12 +120,10 @@ def train_model(left,right):
 	return clf
 
 
-def predict(model, new):
+def predict(model, left, right, new):
 	"""
 	Estimate the slant of each article in new based on left and right training examples.
 	"""
-	
-
 	# Predict on new data
 	all_words = get_all_words(left + right)
 	prediction_matrix = create_prediction_matrix(all_words, new)
@@ -156,7 +155,12 @@ def getObjFromPklz(infilename):
 	finally:
 	    f.close()
 
-print predict([left1, left2], [right1, right3], [left3, right2])
+
+
+model = train_model([left1, left2], [right1, right3])
+# writeToPklz('first_clf', model)
+# model = getObjFromPklz('first_clf')
+print predict(model, [left1, left2], [right1, right3], [left3, right2])
 
 
 
