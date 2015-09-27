@@ -18,4 +18,5 @@ Data Minipulation:
 		Single WOrds
 		POS
 		Bigram words
+	
 
