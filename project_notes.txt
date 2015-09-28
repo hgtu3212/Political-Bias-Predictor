@@ -15,8 +15,19 @@ Data Minipulation:
 	Wordnet:
 		https://wordnet.princeton.edu/
 	Features:
-		Single WOrds
-		POS
-		Bigram words
-	
+		POS - vectorized by most common words
+
+Machine Learning:
+	Use linear regression to provide real valued score for an input
+
+TO DO:
+	Eliminate noise data (clean up articles)
+	Add POS bigram pattern feature
+	Fix up Front End
+	Deploy as WebApp
+	Deploy as Chrome Extension
+	Attempt word binning
+
+		
+
 
