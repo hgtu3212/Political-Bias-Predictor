@@ -1,12 +1,20 @@
-var value = $('.textbox').val()
-$.ajax({
-      type: "POST",
-      url: "http://localhost:8000/parse_data",
-      data: JSON.stringify(value),
-      success: function(msg){
-        //success method
-      },
-      failure: function(msg){
-       //failure message
-      }
-   });
+console.log('here');
+    
+// $('#submitter').click(function(){
+//   console.log(value);
+//   var value = $('textbox1').val()
+//   // $.ajax({
+//   //     type: "POST",
+//   //     url: "/post_data",
+//   //     data: {'input': value}
+
+//   //     success: function(value){
+//   //       //success method
+//   //       alert(' data saved!' + value)
+//   //     },
+//   //     failure: function(){
+//   //      //failure message
+//   //      alert('data did not go through')
+//   //     }
+//   //  });
+// });
