@@ -9,9 +9,10 @@ testInput = [[right1, right2, right3, left1, left2],[0,0,0,-1.1, -1.1,-1.1], [1.
 def testML(input, algorithm):
 	results = algorithm(input[0])
 	passes = []
-	for i in range results(len(results)):
+	for item in results:
 		if item < input[1] and item > input[2]:
 			passes.append(('pass',results)
 		else 
 			passes.append('fail')
 	return passes
+

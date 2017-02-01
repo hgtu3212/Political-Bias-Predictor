@@ -9,7 +9,8 @@ import readability
 import urllib
 import lxml
 from bs4 import BeautifulSoup
-from forms import textInputFromForm	
+from forms import textInputFromForm
+from prediction import predict, train_model
 
 app  = Flask(__name__)
 
@@ -40,20 +41,6 @@ def create_article_vector(all_words, freq_map):
 			features.append(0)
 	return np.array(features)
 
-def predict(model, left, right, new):
-	"""
-	Estimate the slant of each article in new based on left and right training examples.
-	"""
-	# Predict on new data
-	all_words = get_all_words(left + right)
-	prediction_matrix = create_prediction_matrix(all_words, new)
-	prediction_list = []
-	for i in range(len(prediction_matrix)):
-		row_to_predict = prediction_matrix[i]
-		prediction = round(model.predict(row_to_predict) + 3.18, 2)
-		prediction_list.append(prediction)
-
-	return np.array(prediction_list)
 
 def getObjFromPklz(infilename):
 	"""
@@ -62,6 +49,8 @@ def getObjFromPklz(infilename):
 	f = gzip.open(infilename, 'rb')
 	try:
 	    return pickle.load(f)
+	except Exception as e:
+		return -1
 	finally:
 	    f.close()
 # (big_data_full, big_words_full, big_tags_full) = getObjFromPklz('read_training.txt')
@@ -99,6 +88,7 @@ def parse_input(input_string):
 	if input_string[0:4] == 'http':
 		return articleparser.parseArticles([input_string])
 	else:
+		print ("Input string: " + input_string)
 		return input_string
 
 
@@ -107,10 +97,15 @@ def handle_get_vector(stringInput):
 
 	#parse the input into text if url
 	textInput = parse_input(stringInput)
-	#Get vector with our given input data 
-	model = getObjFromPklz("first_clf")
+	#Get vector with our given input data
+
+	model = getObjFromPklz("second_clf")
+	if not model:
+		model = train_model()
+
+
 	#run our input through our model
-	vect = {'rating': predict(model[0],model[1],model[2], textInput)}
+	vect = {'rating': predict(model[0],model[1],model[2], [textInput])}
 	# return dictionary
 	return vect['rating'][0]
 

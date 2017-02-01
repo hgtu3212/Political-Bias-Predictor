@@ -140,7 +140,7 @@ def predict(model, left, right, new):
 	prediction_list = []
 	for i in range(len(prediction_matrix)):
 		row_to_predict = prediction_matrix[i]
-		prediction = round(model.predict(row_to_predict) + 3.18, 2)
+		prediction = round(model.predict(row_to_predict) + 3.18, 3)
 		prediction_list.append(prediction)
 
 	return np.array(prediction_list)
@@ -169,11 +169,17 @@ def getObjFromPklz(infilename):
 right_articles = [convert_file_to_string('conservative.txt')]
 left_articles = [convert_file_to_string('huffpotext1.txt')]
 all_words = get_all_words(left_articles + right_articles)
-
+def train_it():
+	right_articles = [convert_file_to_string('conservative.txt')]
+	left_articles = [convert_file_to_string('huffpotext1.txt')]
+	model = train_model(left_articles, right_articles)
+	writeToPklz('second_clf', model)
+	return model
+train_it()
 # model = train_model(left_articles, right_articles)
-# writeToPklz('first_clf', model)
-model = getObjFromPklz('first_clf')
-print predict(model[0], model[1], model[2], ['religion', 'Gay rights', 'to', 'conservative'])
+# writeToPklz('second_clf', model)
+model = getObjFromPklz('second_clf')
+print predict(model[0], model[1], model[2], ['aborition is a fundamental right', 'Gay rights', 'to', 'conservative'])
 
 
 
